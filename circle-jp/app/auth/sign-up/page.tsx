@@ -11,7 +11,7 @@ function SignUp() {
         className="z-0 blur-md"
       />
       <main className="border border-inherit w-[600px] h-[370px] rounded-2xl p-6 z-10 backdrop-blur-xl space-y-10">
-        <h4 className="text-center text-2xl">Sign Up</h4>
+        <h4 className="text-center text-4xl">Sign Up</h4>
 
         <form action="" className="mx-auto space-y-3 w-[400px]">
           <div>
@@ -43,7 +43,7 @@ function SignUp() {
 
           <div className="flex justify-between items-center pt-5 text-[16px]">
             <Link
-              href={"auth/sign-in"}
+              href={"/auth/sign-in"}
               className="bg-white text-black py-1 px-2 rounded-2xl"
             >
               Sign In
