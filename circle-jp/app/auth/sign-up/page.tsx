@@ -19,7 +19,7 @@ function SignUp() {
   useEffect(() => {
     if (state.success) {
       Swal.fire({
-        title: "Registration Successful!",
+        title: "Registered!",
         icon: "success",
         toast: true,
         position: "top-end",
