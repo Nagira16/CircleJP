@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation";
-import { createServerSupabaseClient } from "./server";
+import { createSupabaseServer } from "./server";
 
 export const Auth = async () => {
-  const supabase = await createServerSupabaseClient();
+  const supabase = await createSupabaseServer();
 
   const {
     data: { user },
@@ -10,12 +10,10 @@ export const Auth = async () => {
   } = await supabase.auth.getUser();
 
   if (error) {
-    console.error("AuthErorr", error);
-    redirect("/login");
+    redirect("/auth/sign-in");
   }
   if (!user) {
-    console.log("User Not Found");
-    redirect("/login");
+    redirect("/auth/sign-in");
   }
 
   return user;

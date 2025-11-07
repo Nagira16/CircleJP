@@ -23,7 +23,7 @@ function SignIn() {
               <input
                 type="email"
                 name="email"
-                className="border w-[400px] rounded-xl"
+                className="border w-[400px] rounded-2xl p-0.5"
               />
             </div>
 
@@ -32,19 +32,30 @@ function SignIn() {
               <input
                 type="password"
                 name="password"
-                className="border w-[400px] rounded-xl"
+                className="border w-[400px] rounded-2xl p-0.5"
               />
+            </div>
+            <div className="text-center">
+              <Link
+                href={"/auth/forgot-password"}
+                className="text-sm underline"
+              >
+                Forgot your password?
+              </Link>
             </div>
           </div>
 
-          <div className="flex justify-between items-center pt-[94px] text-[17px] text-center">
+          <div className="flex justify-between items-center pt-[50px] text-[17px] text-center">
             <Link
               href={"/auth/sign-up"}
-              className="bg-white text-black py-1 rounded-2xl w-20"
+              className="bg-white text-black py-1 rounded-2xl w-20 hover:bg-gray-200 active:bg-gray-300 transition-colors duration-300"
             >
               Sign Up
             </Link>
-            <button type="submit" className="bg-blue-500 py-1 rounded-2xl w-20">
+            <button
+              type="submit"
+              className={`bg-blue-500 py-1 rounded-2xl w-20 hover:bg-blue-600 active:bg-blue-700 transition-colors duration-300`}
+            >
               Sign In
             </button>
           </div>

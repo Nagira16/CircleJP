@@ -1,7 +1,46 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { signUp } from "./action";
+import { useActionState, useEffect, useState } from "react";
+import Swal from "sweetalert2";
+
+type ActionState = {
+  success: boolean;
+  error?: string;
+};
 
 function SignUp() {
+  const [state, fromAction, isPending] = useActionState<ActionState>(signUp, {
+    success: false,
+  });
+
+  useEffect(() => {
+    if (state.success) {
+      Swal.fire({
+        title: "Registration Successful!",
+        icon: "success",
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+      });
+    }
+    if (state.error) {
+      Swal.fire({
+        title: state.error,
+        icon: "error",
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+      });
+    }
+  }, [state.success, state.error]);
+
   return (
     <div className="grid min-h-screen place-items-center">
       <Image
@@ -14,7 +53,7 @@ function SignUp() {
         <h4 className="text-center text-4xl">Sign Up</h4>
 
         <form
-          action=""
+          action={fromAction}
           className="mx-auto w-[400px] h-60 flex flex-col justify-between"
         >
           <div className="space-y-3">
@@ -23,7 +62,10 @@ function SignUp() {
               <input
                 type="text"
                 name="username"
-                className="border w-[400px] rounded-xl"
+                className="border w-[400px] rounded-2xl p-0.5"
+                disabled={isPending}
+                required
+                minLength={3}
               />
             </div>
 
@@ -32,7 +74,9 @@ function SignUp() {
               <input
                 type="email"
                 name="email"
-                className="border w-[400px] rounded-xl"
+                className="border w-[400px] rounded-2xl p-0.5"
+                disabled={isPending}
+                required
               />
             </div>
 
@@ -41,7 +85,10 @@ function SignUp() {
               <input
                 type="password"
                 name="password"
-                className="border w-[400px] rounded-xl"
+                className="border w-[400px] rounded-2xl p-0.5"
+                disabled={isPending}
+                required
+                minLength={6}
               />
             </div>
           </div>
@@ -49,11 +96,17 @@ function SignUp() {
           <div className="flex justify-between items-center pt-5 text-[17px] text-center">
             <Link
               href={"/auth/sign-in"}
-              className="bg-white text-black py-1 rounded-2xl w-20"
+              className="bg-white text-black py-1 rounded-2xl w-20 hover:bg-gray-200 active:bg-gray-300 transition-colors duration-300"
             >
               Sign In
             </Link>
-            <button type="submit" className="bg-blue-500 py-1 rounded-2xl w-20">
+            <button
+              type="submit"
+              className={`bg-blue-500 py-1 rounded-2xl w-20 hover:bg-blue-600 active:bg-blue-700 transition-colors duration-300${
+                isPending && `animate-pulse`
+              }`}
+              disabled={isPending}
+            >
               Sign Up
             </button>
           </div>
